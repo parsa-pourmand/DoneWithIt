@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 
 export default function CardComponent(props) {
   return (
+    <TouchableWithoutFeedback onPress={props.onPress}>
     <View style = {styles.card}>
       <Image source ={props.image} style={styles.image} resizeMode='cover'/>
       <View style={styles.textContainer}>
@@ -9,6 +10,7 @@ export default function CardComponent(props) {
         {props.subTitle && <Text style={styles.subtitle} numberOfLines={2}>{props.subTitle}</Text>}
       </View>
     </View>
+    </TouchableWithoutFeedback>
   )
 }
 

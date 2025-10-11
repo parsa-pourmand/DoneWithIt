@@ -17,6 +17,10 @@ import RegisterScreen from './app/screens/RegisterScreen';
 import ListingEditScreen from './app/screens/ListingEditScreen';
 import ImageInput from './app/components/ImageInput';
 import ImageInputList from './app/components/ImageInputList';
+import { NavigationContainer } from '@react-navigation/native';
+import AuthNavigator from './app/navigation/AuthNavigator';
+import navigationTheme from './app/navigation/navigationTheme';
+import MainNav from './app/navigation/MainNav';
 
 export default function App() {
   const categories = [
@@ -26,8 +30,15 @@ export default function App() {
   ]
 
   const [category, setCategory] = useState()
+
+
   
   return (
-    <ListingEditScreen/>
+    <GestureHandlerRootView>
+      <NavigationContainer theme={navigationTheme}>
+      
+        <MainNav/>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }

@@ -4,21 +4,24 @@ import colors from '../config/colors'
 import ListItem from '../components/lists/ListItem'
 import Icon from '../components/Icon'
 import ListItemSeparator from '../components/lists/ListItemSeparator'
+import routes from '../navigation/routes'
 
 const items = [
     {
         id:1,
         title:"My Listing",
-        icon: <Icon name="format-list-bulleted" iconColor={colors.white} backgroundColor={colors.primary}/>
+        icon: <Icon name="format-list-bulleted" iconColor={colors.white} backgroundColor={colors.primary}/>,
+        targetScreen: ""
     },
     {
         id:2,
         title:"My Messages",
-        icon: <Icon name="email" iconColor={colors.white} backgroundColor={colors.secondary}/>
+        icon: <Icon name="email" iconColor={colors.white} backgroundColor={colors.secondary}/>,
+        targetScreen:routes.MESSAGES
     },
 ]
 
-export default function MyAccountScreen() {
+export default function MyAccountScreen({navigation}) {
   return (
         <Screen style={styles.screen}>
             <View style={styles.profileContainer}>
@@ -29,7 +32,7 @@ export default function MyAccountScreen() {
                 <FlatList
                     data={items}
                     keyExtractor={item=>item.id.toString()}
-                    renderItem={({item}) =><ListItem title={item.title} IconComponent={item.icon}/>}
+                    renderItem={({item}) =><ListItem title={item.title} IconComponent={item.icon} onPress={()=> navigation.navigate(item.targetScreen)}/>}
                     ItemSeparatorComponent={ListItemSeparator} 
                 />
             </View>

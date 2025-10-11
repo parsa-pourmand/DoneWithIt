@@ -2,8 +2,9 @@ import { View, Text, ImageBackground, Image, StyleSheet, Alert } from 'react-nat
 import React from 'react'
 import ButtonComponent from '../components/ButtonComponent'
 import colors from '../config/colors'
+import routes from '../navigation/routes'
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen({navigation}) {
   return (
     <ImageBackground style={styles.background} source={require("../assets/background.jpeg")} blurRadius={10}>
         <View style={styles.logoContainer}>
@@ -12,10 +13,10 @@ export default function WelcomeScreen() {
         </View>
         
         <View style={styles.register}>
-            <ButtonComponent title={"Register"} onPress={()=>Alert.alert('Pressed')} color ={"primary"}/>
+            <ButtonComponent title={"Register"} onPress={()=>navigation.navigate(routes.REGISTER)} color ={"primary"}/>
         </View>
         <View style={styles.login}> 
-            <ButtonComponent title={"Login"} onPress={()=>Alert.alert('Pressed')} color={"secondary"}/>
+            <ButtonComponent title={"Login"} onPress={()=>navigation.navigate(routes.LOGIN)} color={"secondary"}/>
         </View>
     </ImageBackground>
   )
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     },
     register:{
         width:"100%",
-        bottom:40,
+        bottom:20,
         padding:10
 
     },
