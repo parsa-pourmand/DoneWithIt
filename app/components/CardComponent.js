@@ -4,7 +4,7 @@ export default function CardComponent(props) {
   return (
     <TouchableWithoutFeedback onPress={props.onPress}>
     <View style = {styles.card}>
-      <Image source ={props.image} style={styles.image} resizeMode='cover'/>
+      <Image source ={{uri:props.imageUrl}} style={styles.image} resizeMode='cover'/>
       <View style={styles.textContainer}>
         <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
         {props.subTitle && <Text style={styles.subtitle} numberOfLines={2}>{props.subTitle}</Text>}

@@ -1,33 +1,37 @@
-import {FlatList } from 'react-native'
+import {FlatList, Text } from 'react-native'
 import Screen from './Screen'
 import CardComponent from '../components/CardComponent'
 import ListItemSeparator from '../components/lists/ListItemSeparator'
 import colors from '../config/colors'
 import routes from '../navigation/routes'
+import listingsApi from '../api/listings'
+import { useEffect, useState } from 'react'
+import ButtonComponent from '../components/ButtonComponent'
+import ActivityIndicator from '../components/ActivityIndicator'
+import useApi from '../hooks/useApi'
 
-const listings = [
-    {
-        id:1,
-        image:require('../assets/jacket.jpg'),
-        title:"Red jacket for sale",
-        subTitle:"$100"
-    },
-    {
-        id:2,
-        image:require("../assets/couch.jpg"),
-        title:"Couch in great condition",
-        subTitle:"$1000"
-    }
-]
+
 export default function ListingsScreen({navigation}) {
-  return (
+
+    const listings = useApi(listingsApi.getListings)
+
+    
+    useEffect(() => {listings.request()}, [])
+
+    return (
+    
         <Screen style={{backgroundColor:colors.light}}>
+            {listings.error && <>
+                <Text>Couldn't retrieve listings.</Text>
+                <ButtonComponent title="Retry" onPress={listings.request} color='primary'/>
+            </>}
+            <ActivityIndicator visible={listings.loading}/>
             <FlatList 
-                data={listings}
+                data={listings.data}
                 keyExtractor={item => item.id.toString()}
-                renderItem={({item}) => <CardComponent image={item.image} title={item.title} subTitle={item.subTitle} onPress={()=>navigation.navigate(routes.LISTING_DETAILS, item)}/>}
+                renderItem={({item}) => <CardComponent imageUrl={item.images[0].url} title={item.title} subTitle={item.subTitle} onPress={()=>navigation.navigate(routes.LISTING_DETAILS, item)}/>}
                 ItemSeparatorComponent={ListItemSeparator}
             />
         </Screen>
-  )
+    )
 }
