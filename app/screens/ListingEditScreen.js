@@ -4,6 +4,9 @@ import { FormComponent, FormFieldComponent, FormPickerComponent, SubmitButton } 
 import Screen from './Screen'
 import * as Yup from 'yup'
 import useLocation from '../hooks/useLocation';
+import listingsApi from '../api/listings'
+import { useState } from 'react';
+import UploadScreen from './UploadScreen';
 
 
 
@@ -27,12 +30,31 @@ const categories = [
 ];
 export default function ListingEditScreen() {
     const location = useLocation()
+    const [uploadVisible, setUploadVisible] = useState(false)
+    const [progress, setProgress] = useState()
+
+    const handleSubmit = async (listing, {resetForm}) =>{
+        setProgress(0)
+        setUploadVisible(true)
+
+        
+        const result = await listingsApi.addListings({...listing, location},
+            (progress)=>setProgress(progress))
+        
+
+        if(!result.ok){ 
+            setUploadVisible(false)
+            return alert("Could not save the new Listing!")
+        }
+        resetForm();
+    }
 
   return (
 
     
     <Screen style={{padding:15}}>
-        <FormComponent initialValues={{title:"", price:"", description:"", category:null, images:[]}} onSubmit={values => console.log(location)} validationSchema={validationSchema}>
+        <UploadScreen onDone={()=> setUploadVisible(false)} visible={uploadVisible} progress={progress}/>
+        <FormComponent initialValues={{title:"", price:"", description:"", category:null, images:[]}} onSubmit={handleSubmit} validationSchema={validationSchema}>
             
             <FormImageInputList name="images"/>
 

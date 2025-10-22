@@ -3,12 +3,13 @@ import ErrorMessage from './ErrorMessage'
 import TextInputComponent from '../TextInputComponent';
 
 export default function FormFieldComponent({name, width, ...otherProps}) {
-    const {handleChange, errors, setFieldTouched, touched} = useFormikContext();
+    const {setFieldValue, values, errors, setFieldTouched, touched} = useFormikContext();
   return (
     <>
       <TextInputComponent 
-          onChangeText={handleChange(name)}
+          onChangeText={text => setFieldValue(name, text)}
           onBlur={()=>setFieldTouched(name)}
+          value={values[name]}
           width={width}
           {...otherProps}
       />
