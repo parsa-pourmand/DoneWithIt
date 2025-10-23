@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { Image } from 'react-native-expo-image-cache'
+
 
 export default function CardComponent(props) {
   return (
     <TouchableWithoutFeedback onPress={props.onPress}>
     <View style = {styles.card}>
-      <Image source ={{uri:props.imageUrl}} style={styles.image} resizeMode='cover'/>
+      <Image uri ={props.imageUrl} style={styles.image} tint='light' resizeMode='cover' preview={{uri: props.thumbnailUrl}}/>
       <View style={styles.textContainer}>
         <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
         {props.subTitle && <Text style={styles.subtitle} numberOfLines={2}>{props.subTitle}</Text>}
