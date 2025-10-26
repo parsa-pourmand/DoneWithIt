@@ -19,13 +19,14 @@ export default function ListingsScreen({navigation}) {
     useEffect(() => {listings.request()}, [])
     
     return (
-    
+        <>
+        <ActivityIndicator visible={listings.loading}/>
         <Screen style={{backgroundColor:colors.light}}>
             {listings.error && <>
                 <Text>Couldn't retrieve listings.</Text>
                 <ButtonComponent title="Retry" onPress={listings.request} color='primary'/>
             </>}
-            <ActivityIndicator visible={listings.loading}/>
+            
             <FlatList 
                 data={listings.data}
                 keyExtractor={item => item.id.toString()}
@@ -34,5 +35,6 @@ export default function ListingsScreen({navigation}) {
             />
             
         </Screen>
+        </>
     )
 }

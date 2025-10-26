@@ -1,7 +1,5 @@
-import { View, Text, ImageBackground, Image, StyleSheet, Alert } from 'react-native'
-import React from 'react'
+import { View, Text, ImageBackground, Image, StyleSheet } from 'react-native'
 import ButtonComponent from '../components/ButtonComponent'
-import colors from '../config/colors'
 import routes from '../navigation/routes'
 
 export default function WelcomeScreen({navigation}) {
