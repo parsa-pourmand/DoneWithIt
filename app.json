@@ -16,11 +16,15 @@
     "extra": {
       "eas": {
         "projectId": "c275c9fd-eda4-4fde-8e09-b61cb5d53c78"
+      },
+      "bugsnag": {
+        "apiKey": "4fc3ea2a94a5eca2afa1ba905e7432a4"
       }
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.DoneWithIt"
+      "bundleIdentifier": "com.parsapourmand.DoneWithIt",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
@@ -35,6 +39,14 @@
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
+    }
   }
 }

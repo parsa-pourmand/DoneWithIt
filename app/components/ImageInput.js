@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableWithoutFeedback, Image, Alert } from 'react-
 import colors from '../config/colors';
 import Icon from './Icon';
 import * as ImagePicker from 'expo-image-picker'
+import logger from '../utility/logger';
 
 function ImageInput({onChangeImage, imageUri}) {
     
@@ -24,7 +25,7 @@ function ImageInput({onChangeImage, imageUri}) {
                 onChangeImage(uri)
             }        
             }catch(error){
-                console.log('Error reading the image: ', error)
+                logger.log('Error reading the image: ', error)
             }
     }
 

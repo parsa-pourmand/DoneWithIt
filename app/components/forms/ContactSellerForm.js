@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import FormComponent from "./FormComponent";
 import FormFieldComponent from "./FormFieldComponent";
 import SubmitButton from "./SubmitButton";
+import logger from "../../utility/logger";
 
 function ContactSellerForm({listing}){
     const handleSubmit = async({message}, {resetForm})=>{
@@ -12,7 +13,7 @@ function ContactSellerForm({listing}){
         const result = await messageApi.send(message, listing.id)
 
         if(!result.ok){
-            console.log('Error', result)
+            logger.log('Error', result)
             return Alert.alert("Error", "Could not send the message to the seller!")
         }
 

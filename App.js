@@ -10,6 +10,10 @@ import authStorage from './app/auth/storage'
 import * as SplashScreen from 'expo-splash-screen';
 import { navigationRef } from './app/navigation/rootNavigation';
 import * as Notifications from 'expo-notifications';
+import logger from './app/utility/logger';
+
+logger.start()
+
 SplashScreen.preventAutoHideAsync();
 
 Notifications.setNotificationHandler({
