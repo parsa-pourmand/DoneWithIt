@@ -2,6 +2,7 @@
   "expo": {
     "name": "DoneWithIt",
     "slug": "DoneWithIt",
+    "owner": "parsa_02",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
@@ -12,15 +13,22 @@
       "resizeMode": "cover",
       "backgroundColor": "#e63c4b"
     },
+    "extra": {
+      "eas": {
+        "projectId": "c275c9fd-eda4-4fde-8e09-b61cb5d53c78"
+      }
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.DoneWithIt"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.DoneWithIt"
     },
     "web": {
       "favicon": "./assets/favicon.png"

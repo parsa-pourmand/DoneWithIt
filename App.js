@@ -8,8 +8,17 @@ import OfflineNotice from './app/components/OfflineNotice';
 import AuthContext from './app/auth/context';
 import authStorage from './app/auth/storage'
 import * as SplashScreen from 'expo-splash-screen';
-
+import { navigationRef } from './app/navigation/rootNavigation';
+import * as Notifications from 'expo-notifications';
 SplashScreen.preventAutoHideAsync();
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowBanner: true,      
+    shouldPlaySound: true,     
+    shouldSetBadge: false,  
+  }),
+});
 
 export default function App() {
 
@@ -34,7 +43,7 @@ export default function App() {
     <AuthContext.Provider value = {{user, setUser}}>
       <GestureHandlerRootView>
         <OfflineNotice/>
-        <NavigationContainer theme={navigationTheme}>
+        <NavigationContainer ref={navigationRef} theme={navigationTheme}>
       
           {user ? <MainNav/> : <AuthNavigator/>}
         </NavigationContainer>

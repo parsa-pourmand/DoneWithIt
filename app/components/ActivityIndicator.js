@@ -1,4 +1,3 @@
-
 import LottieView from 'lottie-react-native';
 import { View, StyleSheet } from 'react-native';
 

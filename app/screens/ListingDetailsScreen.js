@@ -1,17 +1,19 @@
-import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, KeyboardAvoidingView, Platform } from 'react-native'
 import colors from '../config/colors'
 import ListItem from '../components/lists/ListItem'
-import { Image } from 'react-native-expo-image-cache'
-import listings from '../api/listings'
-export default function ListingDetailsScreen({route}) {
+import { Image } from 'expo-image'
+import ContactSellerForm from '../components/forms/ContactSellerForm'
 
+export default function ListingDetailsScreen({route}) {
 
     const item = route.params
   return (
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+      style={{ flex: 1 }}>
     <View style = {styles.container}>
         
-        <Image uri = {item.images[0].url}  preview={{uri: item.images[0].thumbnailUrl}} tint='light' style ={styles.image}/>
+        <Image source = {{uri:item.images[0].url}}  placeholder={{uri: item.images[0].thumbnailUrl}} transition={300} style ={styles.image}/>
 
         <View style={styles.details}>
             <Text style={styles.info}>{item.title}</Text>
@@ -22,7 +24,9 @@ export default function ListingDetailsScreen({route}) {
             </View>
             
         </View>
+        <ContactSellerForm listing={item}/>
     </View>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -50,7 +54,11 @@ const styles = StyleSheet.create({
         fontWeight:500
     },
     listItem:{
-        marginVertical:20
+        marginVertical:7
+    },
+    messageContainer:{
+        padding:15,
+        marginVertical:15,
     }
    
     
